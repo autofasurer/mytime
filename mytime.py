@@ -4,6 +4,7 @@ import sys, argparse
 
 
 def main():
+
     parser = argparse.ArgumentParser()
     parser.add_argument("-p", "--project", required = True, help = "Name of the project you want to track your time spent on.")
     args = vars(parser.parse_args())
@@ -12,10 +13,9 @@ def main():
 
     atexit.register(exit_handler, starttime=starttime, project=args['project'])
 
-    while True:
-        waitforquit = input(f"\033[1;32;40mCurrently timing work on {args['project']}\033[\n\033[0;37;40mType Q to quit\n")
-        if waitforquit.lower() == "q":
-            sys.exit()
+    waitforquit = input(f"\033[1;32;40mCurrently timing work on {args['project']}\033[\n\033[0;37;40mType Q to quit\n")
+    if waitforquit.lower() == "q":
+        sys.exit()
 
 #Funtion to convert the seconds of deltatime (endtime - starttime) to hrs/mins/sec
 def format_deltatime(time_in_seconds):
