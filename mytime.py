@@ -13,7 +13,7 @@ def main():
     atexit.register(exit_handler, starttime=starttime, project=args['project'])
 
     while True:
-        waitforquit = input(f"Currently timing work on {args['project']}\n[Press Q to quit\n")
+        waitforquit = input(f"\033[1;32;40mCurrently timing work on {args['project']}\033[\n\033[0;37;40mType Q to quit\n")
         if waitforquit.lower() == "q":
             sys.exit()
 
@@ -27,9 +27,9 @@ def format_deltatime(time_in_seconds):
 # Function to run when the program quits.
 def exit_handler(starttime, project):
     endtime = arrow.now('Europe/Brussels')
+    total_time_spent = format_deltatime((endtime - starttime).seconds)
     endtime = endtime.format('YYYY-MM-DD HH:mm:ss')
     starttime = starttime.format('YYYY-MM-DD HH:mm:ss')
-    total_time_spent = format_deltatime((endtime - starttime).seconds)
     with open('mytime.txt', 'a+') as timestore:
             timestore.write(f"Work on:\t{project}\nstarted at:\t{starttime}\nended at:\t{endtime}\n")
             timestore.write('___________________________________________________\n' )
