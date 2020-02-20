@@ -27,9 +27,11 @@ def format_deltatime(time_in_seconds):
 # Function to run when the program quits.
 def exit_handler(starttime, project):
     endtime = arrow.now('Europe/Brussels')
+    endtime = endtime.format('YYYY-MM-DD HH:mm:ss')
+    starttime = starttime.format('YYYY-MM-DD HH:mm:ss')
     total_time_spent = format_deltatime((endtime - starttime).seconds)
     with open('mytime.txt', 'a+') as timestore:
-            timestore.write(f"Work on:\t{project}\nstarted at:\t{starttime.format('YYYY-MM-DD HH:mm:ss')}\nended at:\t{endtime.format('YYYY-MM-DD HH:mm:ss')}\n")
+            timestore.write(f"Work on:\t{project}\nstarted at:\t{starttime}\nended at:\t{endtime}\n")
             timestore.write('___________________________________________________\n' )
             timestore.write(f'Total:\t\t\t\t{total_time_spent}\n')
             timestore.write('===================================================\n\n')
